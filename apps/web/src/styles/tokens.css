@@ -1,0 +1,37 @@
+:root {
+  /* Paleta tomada de la identidad de la presentación de Chashly */
+  --ink: #0b0f3a;        /* fondo */
+  --deep: #161b52;       /* superficies */
+  --line: #2a3070;       /* bordes */
+  --lilac: #efb1f2;      /* marca y acciones */
+  --lilac-ink: #2b0a33;  /* texto sobre lila */
+  --mint: #7fe3c4;       /* ingresos, estado correcto */
+  --coral: #ff9a8b;      /* gastos, límite superado */
+  --amber: #ffd27a;      /* advertencia */
+  --text: #ece9fa;
+  --muted: #a3a0cf;
+
+  --font-display: 'Bricolage Grotesque Variable', 'Arial Narrow', system-ui, sans-serif;
+  --font-ui: 'Figtree Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Escala tipográfica modular 1.25 */
+  --step--1: 0.8rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.563rem;
+  --step-5: clamp(3rem, 14vw, 4.8rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  --radius-control: 10px;
+  --radius-pill: 999px;
+  --content-width: 34rem;
+  --tabbar-height: 4.25rem;
+
+  color-scheme: dark;
+}
