@@ -1,8 +1,9 @@
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CATEGORIES, type TransactionType } from '@chashly/shared';
 import { fromDateInputValue, toDateInputValue } from '../../lib/dates';
 import { toMinorUnits } from '../../lib/money';
+import { saveTransactionPhoto } from './transaction-photos';
 import { addTransaction } from './transactions-repository';
 
 const DEFAULT_CATEGORY: Record<TransactionType, string> = { expense: 'Alimentación', income: 'Salario' };
@@ -16,11 +17,27 @@ export function TransactionFormPage() {
   const [date, setDate] = useState(toDateInputValue());
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [photo, setPhoto] = useState<File | null>(null);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
 
   const changeType = (next: TransactionType) => {
     setType(next);
     setCategory(DEFAULT_CATEGORY[next]);
   };
+
+  function handlePhotoChange(event: ChangeEvent<HTMLInputElement>) {
+    setPhoto(event.target.files?.[0] ?? null);
+  }
+
+  useEffect(() => {
+    if (!photo) {
+      setPhotoPreview(null);
+      return;
+    }
+    const url = URL.createObjectURL(photo);
+    setPhotoPreview(url);
+    return () => URL.revokeObjectURL(url);
+  }, [photo]);
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -30,7 +47,8 @@ export function TransactionFormPage() {
       return;
     }
     setSaving(true);
-    await addTransaction({ type, amount: minor, category, description, occurredAt: fromDateInputValue(date) });
+    const id = await addTransaction({ type, amount: minor, category, description, occurredAt: fromDateInputValue(date) });
+    if (photo) await saveTransactionPhoto(id, photo);
     navigate(-1);
   }
 
@@ -91,6 +109,12 @@ export function TransactionFormPage() {
       <label className="field">
         <span className="field__label">Fecha</span>
         <input type="date" value={date} max={toDateInputValue()} onChange={(e) => setDate(e.target.value)} required />
+      </label>
+
+      <label className="field">
+        <span className="field__label">Foto (opcional)</span>
+        <input type="file" accept="image/*" capture="environment" onChange={handlePhotoChange} />
+        {photoPreview && <img src={photoPreview} alt="Vista previa de la foto del movimiento" className="field__photo-preview" />}
       </label>
 
       <div className="form__actions">

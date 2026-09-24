@@ -15,6 +15,13 @@ export interface MetaEntry {
   value: unknown;
 }
 
+/** Foto adjunta a un movimiento. Solo vive en el dispositivo: no viaja por el Outbox ni se sincroniza. */
+export interface PhotoRecord {
+  transactionId: string;
+  blob: Blob;
+  createdAt: number;
+}
+
 /**
  * IndexedDB es la fuente de verdad en el dispositivo: la UI lee y escribe siempre aquí,
  * con o sin red. La sincronización con la nube ocurre en segundo plano.
@@ -25,6 +32,7 @@ export class ChashlyDatabase extends Dexie {
   budgets!: Table<Budget, string>;
   outbox!: Table<OutboxEntry, string>;
   meta!: Table<MetaEntry, string>;
+  photos!: Table<PhotoRecord, string>;
 
   constructor(name = 'chashly') {
     super(name);
@@ -33,6 +41,9 @@ export class ChashlyDatabase extends Dexie {
       budgets: 'id, category, deleted',
       outbox: 'opId, [entity+entityId], createdAt',
       meta: 'key',
+    });
+    this.version(2).stores({
+      photos: 'transactionId',
     });
   }
 

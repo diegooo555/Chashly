@@ -1,7 +1,14 @@
 import type { Transaction } from '@chashly/shared';
 import { Money } from '../../components/Money';
 import { formatDay } from '../../lib/dates';
+import { useTransactionPhotoUrl } from './transaction-photos';
 import { removeTransaction, usePendingIds } from './transactions-repository';
+
+function TransactionPhotoThumbnail({ transactionId }: { transactionId: string }) {
+  const url = useTransactionPhotoUrl(transactionId);
+  if (!url) return <span className="tx__photo tx__photo--empty" aria-hidden="true" />;
+  return <img src={url} alt="" className="tx__photo" />;
+}
 
 interface Props {
   transactions: Transaction[];
@@ -30,6 +37,7 @@ export function TransactionList({ transactions, groupByDay = false, allowDelete 
           <ul className="tx-list">
             {items.map((tx) => (
               <li key={tx.id} className="tx">
+                <TransactionPhotoThumbnail transactionId={tx.id} />
                 <div className="tx__main">
                   <span className="tx__category">{tx.category}</span>
                   {tx.description && <span className="tx__description">{tx.description}</span>}
