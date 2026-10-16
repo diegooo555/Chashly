@@ -12,7 +12,7 @@ export async function authenticate(mode: AuthMode, credentials: Credentials): Pr
     body: credentials,
   });
 
-  // Si entra otra cuenta en este dispositivo, se borran los datos locales de la anterior.
+  
   const ownerId = await getMeta('ownerId');
   if (ownerId && ownerId !== response.user.id) await wipeLocalData();
 
@@ -25,7 +25,7 @@ export async function pendingChangesCount(): Promise<number> {
   return db.outbox.count();
 }
 
-/** Cerrar sesión elimina todos los datos financieros del dispositivo (privacidad). */
+
 export async function logout(): Promise<void> {
   await wipeLocalData();
 }

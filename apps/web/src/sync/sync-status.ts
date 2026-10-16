@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from 'react';
 
-/** Estado efímero de la sincronización iniciada desde la ventana (no se persiste). */
+
 type Listener = () => void;
 let syncing = false;
 const listeners = new Set<Listener>();

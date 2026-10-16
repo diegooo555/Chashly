@@ -42,7 +42,7 @@ select {
   border-radius: 4px;
 }
 
-/* ---------- Estructura ---------- */
+
 .shell {
   min-height: 100dvh;
   padding-bottom: calc(var(--tabbar-height) + env(safe-area-inset-bottom) + var(--space-6));
@@ -110,7 +110,7 @@ select {
   align-items: baseline;
 }
 
-/* ---------- Saldo del mes: el elemento protagonista ---------- */
+
 .balance {
   padding-top: var(--space-4);
 }
@@ -152,7 +152,7 @@ select {
   font-weight: 600;
 }
 
-/* ---------- Dinero ---------- */
+
 .money {
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -166,7 +166,7 @@ select {
   color: var(--text);
 }
 
-/* ---------- Movimientos ---------- */
+
 .tx-groups {
   display: grid;
   gap: var(--space-6);
@@ -248,7 +248,7 @@ select {
   color: var(--coral);
 }
 
-/* ---------- Presupuestos ---------- */
+
 .meters {
   list-style: none;
   margin: 0;
@@ -313,7 +313,7 @@ select {
   font-size: var(--step--1);
 }
 
-/* ---------- Formularios ---------- */
+
 .form {
   display: grid;
   gap: var(--space-4);
@@ -410,7 +410,7 @@ select {
   background: var(--mint);
 }
 
-/* ---------- Botones ---------- */
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -451,7 +451,7 @@ select {
   text-underline-offset: 3px;
 }
 
-/* ---------- Estado de sincronización ---------- */
+
 .sync-badge {
   display: inline-flex;
   align-items: center;
@@ -502,7 +502,7 @@ select {
   }
 }
 
-/* ---------- Navegación inferior ---------- */
+
 .tabbar {
   position: fixed;
   inset: auto 0 0;
@@ -547,7 +547,7 @@ select {
   outline-offset: 2px;
 }
 
-/* ---------- Mensajes ---------- */
+
 .empty {
   display: grid;
   gap: var(--space-4);
@@ -586,7 +586,7 @@ select {
   gap: var(--space-2);
 }
 
-/* ---------- Autenticación ---------- */
+
 .auth {
   min-height: 100dvh;
   width: min(100% - 2 * var(--space-4), var(--content-width));

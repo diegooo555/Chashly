@@ -21,7 +21,7 @@ export function useTransactions(limit?: number): Transaction[] | undefined {
   }, [limit]);
 }
 
-/** IDs con cambios aún no enviados a la nube (para marcarlos en la UI). */
+
 export function usePendingIds(): Set<string> {
   const ids = useLiveQuery(() => db.outbox.toArray((rows) => rows.map((r) => r.entityId)), [], []);
   return new Set(ids);

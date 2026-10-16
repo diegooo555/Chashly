@@ -14,7 +14,7 @@ function useTransactionPhotoBlob(transactionId: string): Blob | undefined {
   return useLiveQuery(async () => (await db.photos.get(transactionId))?.blob, [transactionId]);
 }
 
-/** URL de objeto para mostrar la foto en <img>; se revoca sola cuando cambia o se desmonta. */
+
 export function useTransactionPhotoUrl(transactionId: string): string | undefined {
   const blob = useTransactionPhotoBlob(transactionId);
   const [url, setUrl] = useState<string>();

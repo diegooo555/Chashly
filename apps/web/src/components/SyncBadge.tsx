@@ -9,7 +9,7 @@ type Tone = 'offline' | 'busy' | 'pending' | 'error' | 'done';
 
 const plural = (n: number) => (n === 1 ? '1 cambio' : `${n} cambios`);
 
-/** Muestra en todo momento si los datos del dispositivo ya están en la nube. */
+
 export function SyncBadge() {
   const online = useIsOnline();
   const syncing = useIsSyncing();

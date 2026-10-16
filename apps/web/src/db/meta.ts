@@ -1,10 +1,10 @@
 import type { AuthResponse } from '@chashly/shared';
 import { db } from './database';
 
-/** Claves tipadas del almacén clave-valor local. */
+
 export interface MetaSchema {
   session: AuthResponse;
-  /** Dueño de los datos locales; sobrevive a una sesión expirada. */
+  
   ownerId: string;
   pullCursor: number;
   lastSyncedAt: number;

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Change, Transaction } from '@chashly/shared';
-// Prueba de integración: el motor del cliente habla con el SyncService real del servidor.
+
 import { createInMemoryRepositories } from '../../../api/src/repositories/memory/index';
 import { SyncService } from '../../../api/src/services/sync.service';
 import { saveLocal } from '../data/local-store';

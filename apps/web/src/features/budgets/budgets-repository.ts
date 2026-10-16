@@ -6,7 +6,7 @@ import { db } from '../../db/database';
 export function useBudgets(): Budget[] | undefined {
   return useLiveQuery(async () => {
     const all = await db.budgets.filter((b) => !b.deleted).toArray();
-    // Si dos dispositivos crearon offline un presupuesto para la misma categoría, gana el más reciente.
+    
     const latest = new Map<string, Budget>();
     for (const b of all) {
       const current = latest.get(b.category);

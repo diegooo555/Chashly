@@ -9,7 +9,7 @@ import { App } from './App';
 const root = document.getElementById('root');
 if (!root) throw new Error('No se encontró #root');
 
-// Pide al navegador no borrar IndexedDB bajo presión de espacio (datos offline valiosos).
+
 void navigator.storage?.persist?.();
 
 createRoot(root).render(

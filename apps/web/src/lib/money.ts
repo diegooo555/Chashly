@@ -1,6 +1,6 @@
 export const DEFAULT_CURRENCY = 'COP';
 
-/** Montos se guardan en centavos (enteros). Estas funciones son el único punto de conversión. */
+
 export function toMinorUnits(value: string): number | null {
   const normalized = value.replace(/[^\d.,]/g, '').replace(/\./g, '').replace(',', '.');
   const parsed = Number(normalized);

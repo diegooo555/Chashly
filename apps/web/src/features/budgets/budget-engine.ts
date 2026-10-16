@@ -1,10 +1,10 @@
 import type { Budget, Transaction } from '@chashly/shared';
 import { daysInMonth, monthKey } from '../../lib/dates';
 
-/**
- * Motor analítico de presupuestos (RF-03). Funciones puras: fáciles de probar y
- * reutilizables en el cliente o en el servidor.
- */
+
+
+
+
 
 export const WARNING_RATIO = 0.8;
 
@@ -21,7 +21,7 @@ export interface BudgetEvaluation {
   budget: Budget;
   spent: number;
   ratio: number;
-  /** Gasto proyectado al cierre del mes con el ritmo actual. */
+  
   projected: number;
   status: BudgetStatus;
 }

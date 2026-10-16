@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      // injectManifest: escribimos nuestro propio service worker (src/sw.ts) y Workbox
-      // solo inyecta la lista de archivos a precachear. Necesario para Background Sync propio.
+      
+      
       strategies: 'injectManifest',
       srcDir: 'src',
       filename: 'sw.ts',
@@ -25,8 +25,8 @@ export default defineConfig({
         scope: '/',
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#0B0F3A',
-        theme_color: '#0B0F3A',
+        background_color: '#F4F8FF',
+        theme_color: '#1D4ED8',
         icons: [
           { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
           { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png' },

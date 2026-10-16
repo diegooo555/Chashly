@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { Budget, Transaction } from '@chashly/shared';
 import { classify, evaluateBudgets, projectMonthEnd, summarizeMonth } from './budget-engine';
 
-const REF = new Date(2026, 8, 15, 12); // 15 de septiembre 2026 (30 días)
+const REF = new Date(2026, 8, 15, 12); 
 
 function tx(partial: Partial<Transaction>): Transaction {
   return {

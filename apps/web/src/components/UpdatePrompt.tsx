@@ -1,6 +1,6 @@
 import { useRegisterSW } from 'virtual:pwa-register/react';
 
-/** Avisa cuando hay una versión nueva del service worker y deja que el usuario decida cuándo aplicarla. */
+
 export function UpdatePrompt() {
   const {
     offlineReady: [offlineReady, setOfflineReady],

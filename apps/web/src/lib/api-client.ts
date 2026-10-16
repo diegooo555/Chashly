@@ -21,10 +21,10 @@ interface RequestOptions {
   token?: string;
 }
 
-/**
- * Cliente HTTP mínimo. Funciona tanto en la ventana como en el service worker
- * (solo usa fetch), por eso el motor de sincronización puede compartirlo.
- */
+
+
+
+
 export async function apiRequest<T>(path: string, { method = 'GET', body, token }: RequestOptions = {}): Promise<T> {
   const headers: Record<string, string> = { Accept: 'application/json' };
   if (body !== undefined) headers['Content-Type'] = 'application/json';

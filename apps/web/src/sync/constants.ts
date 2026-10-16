@@ -1,4 +1,4 @@
-/** Tag de Background Sync: el navegador despierta al service worker con este nombre al volver la red. */
+
 export const SYNC_TAG = 'chashly-sync';
 export const SYNC_LOCK = 'chashly-sync-lock';
 export const PUSH_BATCH_SIZE = 100;

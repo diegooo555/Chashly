@@ -2,10 +2,10 @@ import { db } from '../../db/database';
 import { formatMoney } from '../../lib/money';
 import { evaluateBudgets, summarizeMonth } from './budget-engine';
 
-/**
- * RF-05: alerta local cuando un gasto hace que una categoría supere su presupuesto.
- * Se evalúa en el dispositivo, por eso funciona también sin conexión.
- */
+
+
+
+
 export async function notifyIfBudgetCrossed(category: string, before: number): Promise<void> {
   if (!('Notification' in window) || Notification.permission !== 'granted') return;
 

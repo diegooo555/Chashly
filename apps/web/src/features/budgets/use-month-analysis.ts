@@ -7,7 +7,7 @@ export interface MonthAnalysis {
   evaluations: BudgetEvaluation[];
 }
 
-/** Resumen del mes en curso, recalculado automáticamente cuando cambian los datos locales. */
+
 export function useMonthAnalysis(): MonthAnalysis | undefined {
   return useLiveQuery(async () => {
     const now = new Date();

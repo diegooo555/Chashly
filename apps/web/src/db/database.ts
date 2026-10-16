@@ -1,7 +1,7 @@
 import Dexie, { type Table } from 'dexie';
 import type { Budget, EntityName, EntityOf, Transaction } from '@chashly/shared';
 
-/** Cambio local pendiente de enviar al servidor (patrón Outbox). */
+
 export interface OutboxEntry<E extends EntityName = EntityName> {
   opId: string;
   entity: E;
@@ -15,18 +15,18 @@ export interface MetaEntry {
   value: unknown;
 }
 
-/** Foto adjunta a un movimiento. Solo vive en el dispositivo: no viaja por el Outbox ni se sincroniza. */
+
 export interface PhotoRecord {
   transactionId: string;
   blob: Blob;
   createdAt: number;
 }
 
-/**
- * IndexedDB es la fuente de verdad en el dispositivo: la UI lee y escribe siempre aquí,
- * con o sin red. La sincronización con la nube ocurre en segundo plano.
- * La misma base es accesible desde la ventana y desde el service worker.
- */
+
+
+
+
+
 export class ChashlyDatabase extends Dexie {
   transactions!: Table<Transaction, string>;
   budgets!: Table<Budget, string>;

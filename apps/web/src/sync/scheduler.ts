@@ -9,12 +9,12 @@ interface SyncManager {
 }
 type RegistrationWithSync = ServiceWorkerRegistration & { sync?: SyncManager };
 
-/**
- * Pide una sincronización.
- * 1) Si el navegador soporta Background Sync, la delega al service worker: se ejecuta
- *    en cuanto haya red, aunque el usuario haya cerrado la pestaña.
- * 2) Si no, sincroniza desde la ventana cuando hay conexión.
- */
+
+
+
+
+
+
 export async function requestSync(): Promise<void> {
   const registration = (await navigator.serviceWorker?.getRegistration()) as RegistrationWithSync | undefined;
 
@@ -23,7 +23,6 @@ export async function requestSync(): Promise<void> {
       await registration.sync.register(SYNC_TAG);
       return;
     } catch {
-      // Permiso denegado o no disponible: continuar con el respaldo.
     }
   }
   if (navigator.onLine) await syncFromWindow();
@@ -34,13 +33,12 @@ export async function syncFromWindow(): Promise<void> {
   try {
     await runSync();
   } catch {
-    // El error queda guardado en meta.lastSyncError y se muestra en la UI.
   } finally {
     setSyncing(false);
   }
 }
 
-/** Disparadores automáticos: al volver la red, al volver a la pestaña y cada minuto. */
+
 export function startSyncScheduler(): () => void {
   const onOnline = () => void requestSync();
   const onVisible = () => {
