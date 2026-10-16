@@ -382,6 +382,26 @@ select {
   margin-top: var(--space-2);
 }
 
+.photo-picker,
+.camera__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.camera {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.camera__video {
+  width: 100%;
+  max-height: 20rem;
+  background: var(--deep);
+  border-radius: var(--radius-control);
+  object-fit: cover;
+}
+
 .segmented {
   display: inline-grid;
   grid-auto-flow: column;

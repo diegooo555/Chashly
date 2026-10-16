@@ -1,9 +1,11 @@
-import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CATEGORIES, type TransactionType } from '@chashly/shared';
 import { fromDateInputValue, toDateInputValue } from '../../lib/dates';
 import { toMinorUnits } from '../../lib/money';
+import { CameraCapture } from './CameraCapture';
 import { saveTransactionPhoto } from './transaction-photos';
+import { isCameraSupported } from './use-camera';
 import { addTransaction } from './transactions-repository';
 
 const DEFAULT_CATEGORY: Record<TransactionType, string> = { expense: 'Alimentación', income: 'Salario' };
@@ -19,6 +21,9 @@ export function TransactionFormPage() {
   const [saving, setSaving] = useState(false);
   const [photo, setPhoto] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [cameraOpen, setCameraOpen] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
 
   const changeType = (next: TransactionType) => {
     setType(next);
@@ -26,7 +31,14 @@ export function TransactionFormPage() {
   };
 
   function handlePhotoChange(event: ChangeEvent<HTMLInputElement>) {
-    setPhoto(event.target.files?.[0] ?? null);
+    const file = event.target.files?.[0];
+    if (file) setPhoto(file);
+    event.target.value = '';
+  }
+
+  function handleTakePhoto() {
+    if (isCameraSupported()) setCameraOpen(true);
+    else cameraInputRef.current?.click();
   }
 
   useEffect(() => {
@@ -111,11 +123,30 @@ export function TransactionFormPage() {
         <input type="date" value={date} max={toDateInputValue()} onChange={(e) => setDate(e.target.value)} required />
       </label>
 
-      <label className="field">
+      <div className="field">
         <span className="field__label">Foto (opcional)</span>
-        <input type="file" accept="image/*" capture="environment" onChange={handlePhotoChange} />
+        <input ref={fileInputRef} type="file" accept="image/*" hidden onChange={handlePhotoChange} />
+        <input ref={cameraInputRef} type="file" accept="image/*" capture="environment" hidden onChange={handlePhotoChange} />
+        {cameraOpen ? (
+          <CameraCapture
+            onCapture={(captured) => {
+              setPhoto(captured);
+              setCameraOpen(false);
+            }}
+            onCancel={() => setCameraOpen(false)}
+          />
+        ) : (
+          <div className="photo-picker">
+            <button type="button" className="button button--ghost" onClick={() => fileInputRef.current?.click()}>
+              Subir imagen
+            </button>
+            <button type="button" className="button button--ghost" onClick={handleTakePhoto}>
+              Tomar foto
+            </button>
+          </div>
+        )}
         {photoPreview && <img src={photoPreview} alt="Vista previa de la foto del movimiento" className="field__photo-preview" />}
-      </label>
+      </div>
 
       <div className="form__actions">
         <button type="submit" className="button button--primary" disabled={saving}>
